@@ -6,24 +6,24 @@ using UnityEngine.SceneManagement;
 public class LoadSceneDoor : MonoBehaviour
 {
     [SerializeField] private string sceneToLoad = "Outside";  // Set this in the Inspector
-
-
-    // Start is called before the first frame update
+    private SceneTransitionManager sceneTransitionManager;
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        sceneTransitionManager = GameObject.Find("Scene Transition Manager").GetComponent<SceneTransitionManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            if (sceneTransitionManager)
+            {
+                sceneTransitionManager.SetLastExitPoint(transform.name);
+            }
+            else
+            {
+                Debug.LogWarning("SceneTransitionManager not found in the scene!");
+            }
             SceneManager.LoadScene(sceneToLoad);
         }
     }
