@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 107301499}
   m_Layer: 0
-  m_Name: Bar Back Door
+  m_Name: Bar Back Door Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364689940}
   m_Layer: 0
-  m_Name: Bar Door
+  m_Name: Bar Door Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

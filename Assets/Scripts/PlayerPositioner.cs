@@ -23,7 +23,7 @@ public class PlayerPositioner : MonoBehaviour
     {
         foreach (Transform entryPoint in entryPoints)
         {
-            if (entryPoint.name == id) // Assuming entryPoint GameObjects are named with their IDs
+            if (entryPoint.name.Contains(id)) // Assuming entryPoint GameObjects are named with their IDs
             {
                 return entryPoint;
             }

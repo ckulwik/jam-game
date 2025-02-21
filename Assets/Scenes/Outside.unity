@@ -978,7 +978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 976522976}
   m_Layer: 0
-  m_Name: My Door
+  m_Name: My Door Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1456,7 +1456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285163640}
   m_Layer: 0
-  m_Name: Neighbor 1's Door
+  m_Name: Neighbor 1's Door Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1592,7 +1592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1359627127}
   m_Layer: 0
-  m_Name: Bar Back Door
+  m_Name: Bar Back Door Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2774,7 +2774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1997657649}
   m_Layer: 0
-  m_Name: Bar Door
+  m_Name: Bar Door Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
