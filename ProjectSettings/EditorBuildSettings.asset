@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Neighbor1'sHouse.unity
     guid: c6cace3da309a1344974eabb036afd10
+  - enabled: 1
+    path: Assets/Scenes/Bar.unity
+    guid: 6cbcc854ebf03e241a297623c811f035
   m_configObjects: {}
