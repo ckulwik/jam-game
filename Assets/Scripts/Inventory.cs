@@ -28,6 +28,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public List<Item> GetItems() // New method to retrieve the list of items
+    {
+        return items; // Return the list of items
+    }
+
     public void DisplayInventory()
     {
         Debug.Log("Inventory Items:");
