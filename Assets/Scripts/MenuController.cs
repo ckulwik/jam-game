@@ -41,13 +41,16 @@ public class MenuController : MonoBehaviour
     {
         if (inventory != null)
         {
-            List<Item> items = inventory.GetItems(); // Get the current items from the inventory
-            inventoryText.text = ""; // Clear previous text
-
-            foreach (Item item in items)
-            {
-                inventoryText.text += item.ToString() + "\n"; // Append each item's string representation
-            }
+            inventoryText.text = inventory.GetDisplayInventoryText();
         }
+        // {
+        //     List<Item> items = inventory.GetItems(); // Get the current items from the inventory
+        //     inventoryText.text = ""; // Clear previous text
+
+        //     foreach (Item item in items)
+        //     {
+        //         inventoryText.text += item.ToString() + "\n"; // Append each item's string representation
+        //     }
+        // }
     }
 }

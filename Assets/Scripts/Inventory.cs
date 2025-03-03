@@ -3,42 +3,59 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private List<Item> items; // List to store the items in the inventory
-
-    void Start()
-    {
-        items = new List<Item>(); // Initialize the inventory
-    }
+    // Dictionary to hold items and their counts
+    private Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
 
     public void AddItem(Item item)
     {
-        items.Add(item);
-        Debug.Log($"{item.itemName} has been added to the inventory.");
-    }
-
-    public void RemoveItem(Item item)
-    {
-        if (items.Remove(item))
+        if (items.ContainsKey(item.id))
         {
-            Debug.Log($"{item.itemName} has been removed from the inventory.");
+            // Increment the count if the item already exists
+            items[item.id] = (items[item.id].item, items[item.id].count + 1);
         }
         else
         {
-            Debug.Log($"{item.itemName} is not in the inventory.");
+            // Add the new item with a count of 1
+            items.Add(item.id, (item, 1));
         }
+        Debug.Log($"Added item: {item.itemName} with ID: {item.id} to the inventory.");
     }
 
-    public List<Item> GetItems() // New method to retrieve the list of items
+    public bool RemoveItem(Item item)
     {
-        return items; // Return the list of items
-    }
-
-    public void DisplayInventory()
-    {
-        Debug.Log("Inventory Items:");
-        foreach (Item item in items)
+        if (items.ContainsKey(item.id))
         {
-            Debug.Log(item.ToString());
+            var currentItem = items[item.id];
+            if (currentItem.count > 1)
+            {
+                // Decrement the count if more than one exists
+                items[item.id] = (currentItem.item, currentItem.count - 1);
+            }
+            else
+            {
+                // Remove the item if count is 1
+                items.Remove(item.id);
+            }
+            Debug.Log($"Removed item: {item.itemName} with ID: {item.id} from the inventory.");
+            return true;
         }
+        Debug.Log($"Item with ID: {item.id} not found in inventory.");
+        return false;
+    }
+
+    public string GetDisplayInventoryText()
+    {
+        string display = "Inventory Items:\n";
+
+        // Build the display string using item ID as the key
+        foreach (var kvp in items)
+        {
+            int itemId = kvp.Key;
+            var (item, count) = kvp.Value; // Deconstruct the tuple
+            display += $"{count}x {item.itemName}: {item.description} (Value: {item.value * count})\n"; // Use the item's properties
+        }
+
+        Debug.Log(display);
+        return display;
     }
 }
