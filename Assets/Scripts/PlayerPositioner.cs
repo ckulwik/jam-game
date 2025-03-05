@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 public class PlayerPositioner : MonoBehaviour
 {
+    public static PlayerPositioner Instance { get; private set; }
+
     public Transform[] entryPoints; // Assign these in the Unity Editor
     private SceneTransitionManager sceneTransitionManager;
 
-    private void Start()
+     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         sceneTransitionManager = GameObject.Find("Scene Transition Manager").GetComponent<SceneTransitionManager>();
-       
-        string exitPointId = sceneTransitionManager.GetLastExitPoint();
-        Transform entryPoint = FindEntryPointById(exitPointId);
+
+    }
+
+    public void GetSceneSpawnPointAndPositionPlayer() {
+        // Get the entry points for the current scene based on name
+        entryPoints = GameObject.FindGameObjectsWithTag("SpawnPoint")
+                                  .Select(go => go.transform)
+                                  .ToArray();   
+            
+
+        string transitionPointId = sceneTransitionManager.GetLastTransitionPoint();
+
+        Debug.Log("getLastTransitionPoint: " + transitionPointId);
+        Transform entryPoint = FindEntryPointById(transitionPointId);
         if (entryPoint != null)
         {
             transform.position = entryPoint.position;

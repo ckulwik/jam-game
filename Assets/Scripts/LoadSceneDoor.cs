@@ -18,13 +18,14 @@ public class LoadSceneDoor : MonoBehaviour
         {
             if (sceneTransitionManager)
             {
-                sceneTransitionManager.SetLastExitPoint(transform.name);
+                sceneTransitionManager.SetLastTransitionPoint(transform.name);
             }
             else
             {
                 Debug.LogWarning("SceneTransitionManager not found in the scene!");
             }
             SceneManager.LoadScene(sceneToLoad);
+            
         }
     }
 }

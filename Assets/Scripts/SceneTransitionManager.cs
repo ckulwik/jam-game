@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
     public static SceneTransitionManager Instance;
-    [SerializeField] string lastExitPoint;
+    [SerializeField] string lastTransitionPoint;
+    private Scene scene;
+
 
     private void Awake()
     {
@@ -18,16 +21,44 @@ public class SceneTransitionManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        // It is save to remove listeners even if they
+        // didn't exist so far.
+        // This makes sure it is added only once
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        // Add the listener to be called when a scene is loaded
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        DontDestroyOnLoad(gameObject);
+
+        // Store the creating scene as the scene to trigger start
+        scene = SceneManager.GetActiveScene();
+
     }
 
-    public void SetLastExitPoint(string exitPointId)
+    private void OnDestroy()
     {
-        Debug.Log("SetLastExitPoint: " + exitPointId);
-        lastExitPoint = exitPointId;
+        // Always clean up your listeners when not needed anymore
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public string GetLastExitPoint()
+    // Listener for sceneLoaded
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        return lastExitPoint;
+        // return if not the start calling scene
+        if(!string.Equals(scene.path, this.scene.path)) return;
+
+        PlayerPositioner.Instance.GetSceneSpawnPointAndPositionPlayer();
+    }
+
+    public void SetLastTransitionPoint(string transitionPointId)
+    {
+        Debug.Log("SetLastTransitionPoint: " + transitionPointId);
+        lastTransitionPoint = transitionPointId;
+    }
+
+    public string GetLastTransitionPoint()
+    {
+        return lastTransitionPoint;
     }
 }

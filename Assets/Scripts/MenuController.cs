@@ -5,16 +5,29 @@ using TMPro;
 
 public class MenuController : MonoBehaviour
 {
+    public static MenuController Instance { get; private set; } // Singleton instance
+
     public GameObject menuPanel; // Assign the Panel GameObject in the Inspector
-    public TextMeshProUGUI inventoryText; // Reference to the Text component for displaying inventory items
+    public TextMeshProUGUI inventoryText; 
+    public TextMeshProUGUI moneyText; 
+    
     private Inventory inventory; // Reference to the player's inventory
     private bool isMenuOpen = false;
 
     private void Awake()
     {
+        // Check if an instance already exists
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Destroy the new instance
+            return; // Exit to prevent further execution
+        }
+
+        Instance = this; // Set the singleton instance
+
         // Ensure this GameObject is not destroyed when loading a new scene
         DontDestroyOnLoad(gameObject);
-        inventory = FindObjectOfType<Inventory>(); // Get the player's Inventory component
+        inventory = FindObjectOfType<Inventory>();
     }
 
     void Update()
@@ -33,7 +46,8 @@ public class MenuController : MonoBehaviour
         
         if (isMenuOpen)
         {
-            UpdateInventoryDisplay(); // Update the inventory display when the menu is opened
+            UpdateInventoryDisplay(); 
+            UpdateMoneyDisplay();
         }
     }
 
@@ -43,14 +57,13 @@ public class MenuController : MonoBehaviour
         {
             inventoryText.text = inventory.GetDisplayInventoryText();
         }
-        // {
-        //     List<Item> items = inventory.GetItems(); // Get the current items from the inventory
-        //     inventoryText.text = ""; // Clear previous text
+    }
 
-        //     foreach (Item item in items)
-        //     {
-        //         inventoryText.text += item.ToString() + "\n"; // Append each item's string representation
-        //     }
-        // }
+    void UpdateMoneyDisplay()
+    {
+        if (inventory != null)
+        {
+            moneyText.text = $"Money: ${inventory.money}";
+        }
     }
 }

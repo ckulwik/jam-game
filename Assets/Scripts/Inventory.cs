@@ -3,8 +3,19 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    // public static Inventory Instance { get; private set; } // Singleton instance
+
     // Dictionary to hold items and their counts
     private Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
+
+    public int money = 100;
+
+    // private void Awake()
+    // {
+    //     // Ensure this GameObject is not destroyed when loading a new scene
+    //     DontDestroyOnLoad(this.gameObject);
+    // }
+
 
     public void AddItem(Item item)
     {
@@ -41,6 +52,26 @@ public class Inventory : MonoBehaviour
         }
         Debug.Log($"Item with ID: {item.id} not found in inventory.");
         return false;
+    }
+
+    public void SellItem(Item item)
+    {
+        bool removeSuccess = RemoveItem(item);
+        if (removeSuccess)
+        {
+            money += item.value;
+        }
+    }
+
+    public void BuyItem(Item item)
+    {
+        if (money < item.value)
+        {
+            Debug.Log("Not enough money to buy this item.");
+            return;
+        }
+        AddItem(item);
+        money -= item.value;
     }
 
     public string GetDisplayInventoryText()
