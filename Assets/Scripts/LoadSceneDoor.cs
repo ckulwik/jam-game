@@ -25,7 +25,6 @@ public class LoadSceneDoor : MonoBehaviour
                 Debug.LogWarning("SceneTransitionManager not found in the scene!");
             }
             SceneManager.LoadScene(sceneToLoad);
-            
         }
     }
 }

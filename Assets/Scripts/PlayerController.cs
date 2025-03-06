@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
             if (item != null)
             {
                 inventory.AddItem(item); // Add the item to the inventory
-                Destroy(collision.gameObject); // Optionally destroy the item from the scene
+                Destroy(collision.gameObject); // destroy the item from the scene
             }
         }
     }

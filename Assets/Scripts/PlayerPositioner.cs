@@ -27,10 +27,10 @@ public class PlayerPositioner : MonoBehaviour
     }
 
     public void GetSceneSpawnPointAndPositionPlayer() {
-        // Get the entry points for the current scene based on name
+        // Get the entry points for the current scene based on tag
         entryPoints = GameObject.FindGameObjectsWithTag("SpawnPoint")
-                                  .Select(go => go.transform)
-                                  .ToArray();   
+            .Select(go => go.transform)
+            .ToArray();   
             
 
         string transitionPointId = sceneTransitionManager.GetLastTransitionPoint();

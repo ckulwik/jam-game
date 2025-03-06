@@ -3,19 +3,10 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    // public static Inventory Instance { get; private set; } // Singleton instance
-
     // Dictionary to hold items and their counts
     private Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
 
     public int money = 100;
-
-    // private void Awake()
-    // {
-    //     // Ensure this GameObject is not destroyed when loading a new scene
-    //     DontDestroyOnLoad(this.gameObject);
-    // }
-
 
     public void AddItem(Item item)
     {

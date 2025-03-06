@@ -7,12 +7,16 @@ public class MenuController : MonoBehaviour
 {
     public static MenuController Instance { get; private set; } // Singleton instance
 
-    public GameObject menuPanel; // Assign the Panel GameObject in the Inspector
+    public GameObject playerMenuPanel; // Assign the Panel GameObject in the Inspector
     public TextMeshProUGUI inventoryText; 
     public TextMeshProUGUI moneyText; 
-    
     private Inventory inventory; // Reference to the player's inventory
-    private bool isMenuOpen = false;
+    private bool isPlayerMenuOpen = false;
+
+    public GameObject shopMenuPanel; // Assign the Panel GameObject in the Inspector
+    private Inventory shopInventory; // Reference to the shop's inventory
+    private bool isShopMenuOpen = false;
+    public bool canOpenShop = false;
 
     private void Awake()
     {
@@ -33,21 +37,55 @@ public class MenuController : MonoBehaviour
     void Update()
     {
         // Check for key press to toggle the menu
-        if (Input.GetKeyDown(KeyCode.M)) // Change KeyCode.M to your desired key
+        if (Input.GetKeyDown(KeyCode.E)) // Change KeyCode.M to your desired key
         {
-            ToggleMenu();
+            TogglePlayerMenu();
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ToggleShopMenu();
+        }
+
     }
 
-    void ToggleMenu()
+    void TogglePlayerMenu()
     {
-        isMenuOpen = !isMenuOpen;
-        menuPanel.SetActive(isMenuOpen);
+        // dont open shop menu when player menu is open
+        if (isShopMenuOpen)
+        {
+            return;
+        }
+
+        isPlayerMenuOpen = !isPlayerMenuOpen;
+        playerMenuPanel.SetActive(isPlayerMenuOpen);
         
-        if (isMenuOpen)
+        if (isPlayerMenuOpen)
         {
             UpdateInventoryDisplay(); 
             UpdateMoneyDisplay();
+        }
+    }
+
+    void ToggleShopMenu()
+    {
+        // dont open player menu when shop menu is open
+        if (isPlayerMenuOpen)
+        {
+            return;
+        }
+
+        if (!canOpenShop)
+        {
+            return;
+        }
+
+        isShopMenuOpen = !isShopMenuOpen;
+        shopMenuPanel.SetActive(isShopMenuOpen);
+        
+        if (isShopMenuOpen)
+        {
+            // UpdateShopInventoryDisplay(); 
         }
     }
 
