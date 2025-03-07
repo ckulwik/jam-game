@@ -50,19 +50,19 @@ public class Inventory : MonoBehaviour
         bool removeSuccess = RemoveItem(item);
         if (removeSuccess)
         {
-            money += item.value;
+            money += item.sellPrice;
         }
     }
 
     public void BuyItem(Item item)
     {
-        if (money < item.value)
+        if (money < item.buyPrice)
         {
             Debug.Log("Not enough money to buy this item.");
             return;
         }
         AddItem(item);
-        money -= item.value;
+        money -= item.buyPrice;
     }
 
     public string GetDisplayInventoryText()
@@ -74,7 +74,7 @@ public class Inventory : MonoBehaviour
         {
             int itemId = kvp.Key;
             var (item, count) = kvp.Value; // Deconstruct the tuple
-            display += $"{count}x {item.itemName}: {item.description} (Value: {item.value * count})\n"; // Use the item's properties
+            display += $"{count}x {item.itemName}: {item.description} (Value: {item.sellPrice * count})\n"; // Use the item's properties
         }
 
         Debug.Log(display);
