@@ -36,13 +36,17 @@ public class PlayerController : MonoBehaviour
     // for picking up items and adding them to the inventory
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Item"))
+        if (collision.gameObject.CompareTag("Pickup Item"))
         {
-            Item item = collision.gameObject.GetComponent<Item>(); // Get the Item component
-            if (item != null)
+            PickupItem pickupItem = collision.gameObject.GetComponent<PickupItem>();
+            if (pickupItem != null)
             {
-                inventory.AddItem(item); // Add the item to the inventory
+                inventory.AddItem(pickupItem.item); // Add the item to the inventory
                 Destroy(collision.gameObject); // destroy the item from the scene
+            }
+            else
+            {
+                Debug.Log("Pickup item is null.");
             }
         }
     }

@@ -14,7 +14,8 @@ public class MenuController : MonoBehaviour
     private bool isPlayerMenuOpen = false;
 
     public GameObject shopMenuPanel; // Assign the Panel GameObject in the Inspector
-    private Inventory shopInventory; // Reference to the shop's inventory
+    public TextMeshProUGUI shopInventoryText; 
+    private Shop shopInventory; // Reference to the shop's inventory
     private bool isShopMenuOpen = false;
     public bool canOpenShop = false;
 
@@ -32,6 +33,7 @@ public class MenuController : MonoBehaviour
         // Ensure this GameObject is not destroyed when loading a new scene
         DontDestroyOnLoad(gameObject);
         inventory = FindObjectOfType<Inventory>();
+        shopInventory = FindObjectOfType<Shop>();
     }
 
     void Update()
@@ -85,7 +87,7 @@ public class MenuController : MonoBehaviour
         
         if (isShopMenuOpen)
         {
-            // UpdateShopInventoryDisplay(); 
+            UpdateShopInventoryDisplay(); 
         }
     }
 
@@ -94,6 +96,14 @@ public class MenuController : MonoBehaviour
         if (inventory != null)
         {
             inventoryText.text = inventory.GetDisplayInventoryText();
+        }
+    }
+
+    void UpdateShopInventoryDisplay()
+    {
+        if (shopInventory != null)
+        {
+            shopInventoryText.text = shopInventory.GetDisplayInventoryText();
         }
     }
 

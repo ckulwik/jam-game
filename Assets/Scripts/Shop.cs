@@ -1,28 +1,14 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Text;
-using System.Linq;
 
-public class Inventory : MonoBehaviour
+public class Shop : MonoBehaviour
 {
-    // Dictionary to hold items and their counts
     private Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
 
-    public int money = 100;
-
-    public void AddItem(Item item)
+     public void BuyItem(Item item)
     {
-        if (items.ContainsKey(item.id))
-        {
-            // Increment the count if the item already exists
-            items[item.id] = (items[item.id].item, items[item.id].count + 1);
-        }
-        else
-        {
-            // Add the new item with a count of 1
-            items.Add(item.id, (item, 1));
-        }
-        Debug.Log($"Added item: {item.itemName} with ID: {item.id} to the inventory.");
+        RemoveItem(item);
     }
 
     public bool RemoveItem(Item item)
@@ -40,36 +26,21 @@ public class Inventory : MonoBehaviour
                 // Remove the item if count is 1
                 items.Remove(item.id);
             }
-            Debug.Log($"Removed item: {item.itemName} with ID: {item.id} from the inventory.");
+            Debug.Log($"Removed item: {item.itemName} with ID: {item.id} from the shop inventory.");
             return true;
         }
-        Debug.Log($"Item with ID: {item.id} not found in inventory.");
+        Debug.Log($"Item with ID: {item.id} not found in shop inventory.");
         return false;
     }
 
     public void SellItem(Item item)
     {
-        bool removeSuccess = RemoveItem(item);
-        if (removeSuccess)
-        {
-            money += item.sellPrice;
-        }
-    }
-
-    public void BuyItem(Item item)
-    {
-        if (money < item.buyPrice)
-        {
-            Debug.Log("Not enough money to buy this item.");
-            return;
-        }
-        AddItem(item);
-        money -= item.buyPrice;
+       
     }
 
     public string GetDisplayInventoryText()
     {
-        string display = "Inventory Items:\n";
+        string display = "Shop Items:\n";
 
         // Build the display string using item ID as the key
         foreach (var kvp in items)
@@ -83,4 +54,23 @@ public class Inventory : MonoBehaviour
         return display;
     }
 
+    private void Start()
+    {
+
+        Item itemToAdd = ScriptableObject.CreateInstance<Item>();
+        itemToAdd.id = 3;
+        itemToAdd.itemName = "Health Potion";
+        itemToAdd.description = "A potion that restores 10 health.";
+        itemToAdd.sellPrice = 10;
+        itemToAdd.buyPrice = 10;
+        items.Add(3, (itemToAdd, 10));
+        
+        itemToAdd = ScriptableObject.CreateInstance<Item>();
+        itemToAdd.id = 4;
+        itemToAdd.itemName = "Mana Potion";
+        itemToAdd.description = "A potion that restores 10 mana.";
+        itemToAdd.sellPrice = 10;
+        itemToAdd.buyPrice = 10;
+        items.Add(4, (itemToAdd, 10));
+    }
 }
