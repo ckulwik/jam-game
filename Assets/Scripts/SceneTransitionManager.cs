@@ -45,10 +45,12 @@ public class SceneTransitionManager : MonoBehaviour
     // Listener for sceneLoaded
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("Scene loaded: " + scene.name);
         // return if not the start calling scene
         if(!string.Equals(scene.path, this.scene.path)) return;
 
         PlayerPositioner.Instance.GetSceneSpawnPointAndPositionPlayer();
+        MenuController.Instance.SetShop();
     }
 
     public void SetLastTransitionPoint(string transitionPointId)

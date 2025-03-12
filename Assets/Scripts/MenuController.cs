@@ -33,6 +33,10 @@ public class MenuController : MonoBehaviour
         // Ensure this GameObject is not destroyed when loading a new scene
         DontDestroyOnLoad(gameObject);
         inventory = FindAnyObjectByType<Inventory>();
+        SetShop();
+    }
+
+    public void SetShop() {
         shopInventory = FindAnyObjectByType<Shop>();
     }
 
@@ -104,6 +108,10 @@ public class MenuController : MonoBehaviour
         if (shopInventory != null)
         {
             shopInventoryText.text = shopInventory.GetDisplayInventoryText();
+        }
+        else
+        {
+            Debug.LogError("Shop inventory is null.");
         }
     }
 
