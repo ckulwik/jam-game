@@ -32,8 +32,8 @@ public class MenuController : MonoBehaviour
 
         // Ensure this GameObject is not destroyed when loading a new scene
         DontDestroyOnLoad(gameObject);
-        inventory = FindObjectOfType<Inventory>();
-        shopInventory = FindObjectOfType<Shop>();
+        inventory = FindAnyObjectByType<Inventory>();
+        shopInventory = FindAnyObjectByType<Shop>();
     }
 
     void Update()

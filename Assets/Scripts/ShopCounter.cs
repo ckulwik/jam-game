@@ -8,7 +8,7 @@ public class ShopCounter : MonoBehaviour
         if (other.CompareTag("Player")) // Ensure the player has the "Player" tag
         {
             // Find the MenuController in the scene
-            MenuController menuController = FindObjectOfType<MenuController>();
+            MenuController menuController = FindAnyObjectByType<MenuController>();
             if (menuController != null)
             {
                 menuController.canOpenShop = true; // Allow the player to open the shop
@@ -22,7 +22,7 @@ public class ShopCounter : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Find the MenuController in the scene
-            MenuController menuController = FindObjectOfType<MenuController>();
+            MenuController menuController = FindAnyObjectByType<MenuController>();
             if (menuController != null)
             {
                 menuController.canOpenShop = false; // Disallow the player from opening the shop
