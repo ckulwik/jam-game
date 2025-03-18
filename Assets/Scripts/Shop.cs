@@ -6,7 +6,7 @@ public class Shop : MonoBehaviour
 {
     private Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
 
-     public void BuyItem(Item item)
+    public void BuyItem(Item item)
     {
         RemoveItem(item);
     }
@@ -50,7 +50,6 @@ public class Shop : MonoBehaviour
             display += $"{count}x {item.itemName}: {item.description} (Value: {item.sellPrice * count})\n"; // Use the item's properties
         }
 
-        Debug.Log(display);
         return display;
     }
 

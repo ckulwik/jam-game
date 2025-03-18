@@ -7,14 +7,17 @@ public class MenuController : MonoBehaviour
 {
     public static MenuController Instance { get; private set; } // Singleton instance
 
-    public GameObject playerMenuPanel; // Assign the Panel GameObject in the Inspector
-    public TextMeshProUGUI inventoryText; 
-    public TextMeshProUGUI moneyText; 
     private Inventory inventory; // Reference to the player's inventory
     private bool isPlayerMenuOpen = false;
 
+    public GameObject playerMenuPanel; // Assign the Panel GameObject in the Inspector
+    public TextMeshProUGUI inventoryText; 
+    public TextMeshProUGUI moneyText; 
+
     public GameObject shopMenuPanel; // Assign the Panel GameObject in the Inspector
     public TextMeshProUGUI shopInventoryText; 
+    public TextMeshProUGUI playerShopInventoryText; 
+    public TextMeshProUGUI shopMoneyText; 
     private Shop shopInventory; // Reference to the shop's inventory
     private bool isShopMenuOpen = false;
     public bool canOpenShop = false;
@@ -34,6 +37,16 @@ public class MenuController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         inventory = FindAnyObjectByType<Inventory>();
         SetShop();
+    }
+
+    private void OnBuyButtonClicked()
+    {
+        Debug.Log("Buy button clicked");
+    }
+
+    private void OnSellButtonClicked()
+    {
+        Debug.Log("Sell button clicked");
     }
 
     public void SetShop() {
@@ -68,7 +81,7 @@ public class MenuController : MonoBehaviour
         
         if (isPlayerMenuOpen)
         {
-            UpdateInventoryDisplay(); 
+            UpdatePlayerInventoryDisplay(); 
             UpdateMoneyDisplay();
         }
     }
@@ -92,14 +105,32 @@ public class MenuController : MonoBehaviour
         if (isShopMenuOpen)
         {
             UpdateShopInventoryDisplay(); 
+            UpdatePlayerShopInventoryDisplay();
+            UpdateShopMoneyDisplay();
         }
     }
 
-    void UpdateInventoryDisplay()
+    void UpdatePlayerInventoryDisplay()
     {
         if (inventory != null)
         {
             inventoryText.text = inventory.GetDisplayInventoryText();
+        }
+        else
+        {
+            Debug.LogError("Player inventory is null.");
+        }
+    }
+
+    void UpdatePlayerShopInventoryDisplay()
+    {
+        if (inventory != null)
+        {
+            playerShopInventoryText.text = inventory.GetDisplayInventoryText();
+        }
+        else
+        {
+            Debug.LogError("Player inventory is null.");
         }
     }
 
@@ -121,5 +152,29 @@ public class MenuController : MonoBehaviour
         {
             moneyText.text = $"Money: ${inventory.money}";
         }
+    }
+
+    void UpdateShopMoneyDisplay()
+    {
+        if (inventory != null)
+        {
+            shopMoneyText.text = $"Money: ${inventory.money}";
+        }
+    }
+
+    public void BuyItem(int itemId)
+    {
+        Debug.Log("Buying item with ID: " + itemId);
+        // shopInventory.BuyItem(itemId);
+        // UpdateShopInventoryDisplay();
+        // UpdateMoneyDisplay();
+    }
+
+    public void SellItem(int itemId)
+    {
+        Debug.Log("Selling item with ID: " + itemId);
+        // shopInventory.SellItem(itemId);
+        // UpdateShopInventoryDisplay();
+        // UpdateMoneyDisplay();
     }
 }

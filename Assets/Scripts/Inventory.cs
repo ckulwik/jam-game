@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Text;
 using System.Linq;
 
+// the player's inventory
 public class Inventory : MonoBehaviour
 {
     // Dictionary to hold items and their counts
