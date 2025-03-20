@@ -15,12 +15,13 @@ public class MenuController : MonoBehaviour
     public TextMeshProUGUI moneyText; 
 
     public GameObject shopMenuPanel; // Assign the Panel GameObject in the Inspector
-    public TextMeshProUGUI shopInventoryText; 
+    public GameObject shopInventoryContainer; 
     public TextMeshProUGUI playerShopInventoryText; 
     public TextMeshProUGUI shopMoneyText; 
     private Shop shopInventory; // Reference to the shop's inventory
     private bool isShopMenuOpen = false;
     public bool canOpenShop = false;
+    public GameObject inventoryMenuItemPrefab; // Assign the prefab in the Inspector
 
     private void Awake()
     {
@@ -104,7 +105,7 @@ public class MenuController : MonoBehaviour
         
         if (isShopMenuOpen)
         {
-            UpdateShopInventoryDisplay(); 
+            RenderShopMenu();
             UpdatePlayerShopInventoryDisplay();
             UpdateShopMoneyDisplay();
         }
@@ -134,17 +135,17 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    void UpdateShopInventoryDisplay()
-    {
-        if (shopInventory != null)
-        {
-            shopInventoryText.text = shopInventory.GetDisplayInventoryText();
-        }
-        else
-        {
-            Debug.LogError("Shop inventory is null.");
-        }
-    }
+    // void UpdateShopInventoryDisplay()
+    // {
+    //     if (shopInventory != null)
+    //     {
+    //         shopInventoryText.text = shopInventory.GetDisplayInventoryText();
+    //     }
+    //     else
+    //     {
+    //         Debug.LogError("Shop inventory is null.");
+    //     }
+    // }
 
     void UpdateMoneyDisplay()
     {
@@ -159,6 +160,34 @@ public class MenuController : MonoBehaviour
         if (inventory != null)
         {
             shopMoneyText.text = $"Money: ${inventory.money}";
+        }
+    }
+
+    public void RenderShopMenu()
+    {
+        DestroyShopMenu();
+        float verticalSpacing = 50f; // Adjust this value for desired spacing
+        float currentYPosition = 0f; // Start position for the first item
+    
+        foreach (var (id, (item, count)) in shopInventory.items)
+        {
+            var shopMenuItemObject = Instantiate(inventoryMenuItemPrefab);
+            var shopMenuItem = shopMenuItemObject.GetComponent<InventoryMenuItem>();
+            shopMenuItem.Setup(item, count);
+    
+            // Set the parent to shopInventoryContainer and adjust the local position
+            shopMenuItemObject.transform.SetParent(shopInventoryContainer.transform);
+            shopMenuItemObject.transform.localPosition = new Vector3(0, currentYPosition, 0); // Set position with spacing
+
+            currentYPosition -= verticalSpacing; // Decrease Y position for the next item
+        }
+    }
+
+    void DestroyShopMenu()
+    {
+        foreach (Transform child in shopInventoryContainer.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 

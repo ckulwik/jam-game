@@ -8,25 +8,11 @@ public class InventoryMenuItem : MonoBehaviour
     public Item item;
     public int count;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Setup(Item newItem, int newCount)
     {
-        SetDisplayText();
-
-        Button inventoryButton = GameObject.Find("Inventory Menu Item").GetComponent<Button>(); // Replace with the actual button name
-        if (inventoryButton != null)
-        {
-            inventoryButton.onClick.AddListener(OnInventoryItemClicked);
-        }
-        else
-        {
-            Debug.LogError("Inventory button not found.");
-        }
-    }
-
-    string GetDisplayText()
-    {
-        return $"{item.itemName} x {count}";
+        item = newItem;
+        count = newCount;
+        SetDisplayText(); // Update the display text with the new item and count
     }
 
     void SetDisplayText()
@@ -39,8 +25,13 @@ public class InventoryMenuItem : MonoBehaviour
         transform.Find("Display Text").GetComponent<TextMeshProUGUI>().text = GetDisplayText();
     }
 
-    private void OnInventoryItemClicked()
+    string GetDisplayText()
     {
-        Debug.Log("Inventory Menu Item clicked!");
+        return $"{item.itemName} x {count}";
+    }
+
+    public void OnInventoryItemClicked()
+    {
+        Debug.Log($"{item.itemName} clicked!");
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    private Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
+    public Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
 
     public void BuyItem(Item item)
     {
