@@ -7,7 +7,7 @@ using System.Linq;
 public class Inventory : MonoBehaviour
 {
     // Dictionary to hold items and their counts
-    private Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
+    public Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
 
     public int money = 100;
 

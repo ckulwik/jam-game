@@ -6,8 +6,13 @@ public class Shop : MonoBehaviour
 {
     public Dictionary<int, (Item item, int count)> items = new Dictionary<int, (Item, int)>();
 
-    public void BuyItem(Item item)
+    public void BuyItem(Item item, int playersMoney)
     {
+        if (playersMoney < item.buyPrice)
+        {
+            Debug.Log("Not enough money to buy this item.");
+            return;
+        }
         RemoveItem(item);
     }
 
@@ -61,15 +66,15 @@ public class Shop : MonoBehaviour
         itemToAdd.itemName = "Health Potion";
         itemToAdd.description = "A potion that restores 10 health.";
         itemToAdd.sellPrice = 10;
-        itemToAdd.buyPrice = 10;
-        items.Add(3, (itemToAdd, 10));
+        itemToAdd.buyPrice = 15;
+        items.Add(3, (itemToAdd, 5));
         
         itemToAdd = ScriptableObject.CreateInstance<Item>();
         itemToAdd.id = 4;
         itemToAdd.itemName = "Mana Potion";
         itemToAdd.description = "A potion that restores 10 mana.";
-        itemToAdd.sellPrice = 10;
+        itemToAdd.sellPrice = 5;
         itemToAdd.buyPrice = 10;
-        items.Add(4, (itemToAdd, 10));
+        items.Add(4, (itemToAdd, 8));
     }
 }

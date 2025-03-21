@@ -7,11 +7,13 @@ public class InventoryMenuItem : MonoBehaviour
 
     public Item item;
     public int count;
+    public bool isShopItem;
 
-    public void Setup(Item newItem, int newCount)
+    public void Setup(Item newItem, int newCount, bool newIsShopItem)
     {
         item = newItem;
         count = newCount;
+        isShopItem = newIsShopItem;
         SetDisplayText(); // Update the display text with the new item and count
     }
 
@@ -27,11 +29,22 @@ public class InventoryMenuItem : MonoBehaviour
 
     string GetDisplayText()
     {
-        return $"{item.itemName} x {count}";
+        if (isShopItem)
+        {
+            return $"{item.itemName} x {count} ({item.buyPrice} gold)";
+        }
+        return $"{item.itemName} x {count} ({item.sellPrice} gold)";
     }
 
     public void OnInventoryItemClicked()
     {
-        Debug.Log($"{item.itemName} clicked!");
+        if (isShopItem)
+        {
+            MenuController.Instance.BuyItem(item);
+        }
+        else
+        {
+            MenuController.Instance.SellItem(item);
+        }
     }
 }

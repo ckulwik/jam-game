@@ -7,7 +7,7 @@ public class MenuController : MonoBehaviour
 {
     public static MenuController Instance { get; private set; } // Singleton instance
 
-    private Inventory inventory; // Reference to the player's inventory
+    private Inventory playerInventory; // Reference to the player's inventory
     private bool isPlayerMenuOpen = false;
 
     public GameObject playerMenuPanel; // Assign the Panel GameObject in the Inspector
@@ -16,7 +16,7 @@ public class MenuController : MonoBehaviour
 
     public GameObject shopMenuPanel; // Assign the Panel GameObject in the Inspector
     public GameObject shopInventoryContainer; 
-    public TextMeshProUGUI playerShopInventoryText; 
+    public GameObject playerShopInventoryContainer;
     public TextMeshProUGUI shopMoneyText; 
     private Shop shopInventory; // Reference to the shop's inventory
     private bool isShopMenuOpen = false;
@@ -36,7 +36,7 @@ public class MenuController : MonoBehaviour
 
         // Ensure this GameObject is not destroyed when loading a new scene
         DontDestroyOnLoad(gameObject);
-        inventory = FindAnyObjectByType<Inventory>();
+        playerInventory = FindAnyObjectByType<Inventory>();
         SetShop();
     }
 
@@ -106,66 +106,46 @@ public class MenuController : MonoBehaviour
         if (isShopMenuOpen)
         {
             RenderShopMenu();
-            UpdatePlayerShopInventoryDisplay();
             UpdateShopMoneyDisplay();
         }
     }
 
     void UpdatePlayerInventoryDisplay()
     {
-        if (inventory != null)
+        if (playerInventory != null)
         {
-            inventoryText.text = inventory.GetDisplayInventoryText();
+            inventoryText.text = playerInventory.GetDisplayInventoryText();
         }
         else
         {
-            Debug.LogError("Player inventory is null.");
+            Debug.LogError("Player playerInventory is null.");
         }
     }
-
-    void UpdatePlayerShopInventoryDisplay()
-    {
-        if (inventory != null)
-        {
-            playerShopInventoryText.text = inventory.GetDisplayInventoryText();
-        }
-        else
-        {
-            Debug.LogError("Player inventory is null.");
-        }
-    }
-
-    // void UpdateShopInventoryDisplay()
-    // {
-    //     if (shopInventory != null)
-    //     {
-    //         shopInventoryText.text = shopInventory.GetDisplayInventoryText();
-    //     }
-    //     else
-    //     {
-    //         Debug.LogError("Shop inventory is null.");
-    //     }
-    // }
 
     void UpdateMoneyDisplay()
     {
-        if (inventory != null)
+        if (playerInventory != null)
         {
-            moneyText.text = $"Money: ${inventory.money}";
+            moneyText.text = $"Money: ${playerInventory.money}";
         }
     }
 
     void UpdateShopMoneyDisplay()
     {
-        if (inventory != null)
+        if (playerInventory != null)
         {
-            shopMoneyText.text = $"Money: ${inventory.money}";
+            shopMoneyText.text = $"Money: ${playerInventory.money}";
         }
     }
 
     public void RenderShopMenu()
     {
         DestroyShopMenu();
+        RenderShopInventory();
+        RenderPlayerInventory();
+    }
+
+    public void RenderShopInventory(){
         float verticalSpacing = 50f; // Adjust this value for desired spacing
         float currentYPosition = 0f; // Start position for the first item
     
@@ -173,7 +153,7 @@ public class MenuController : MonoBehaviour
         {
             var shopMenuItemObject = Instantiate(inventoryMenuItemPrefab);
             var shopMenuItem = shopMenuItemObject.GetComponent<InventoryMenuItem>();
-            shopMenuItem.Setup(item, count);
+            shopMenuItem.Setup(item, count, true);
     
             // Set the parent to shopInventoryContainer and adjust the local position
             shopMenuItemObject.transform.SetParent(shopInventoryContainer.transform);
@@ -183,27 +163,56 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    public void RenderPlayerInventory(){
+        float verticalSpacing = 50f; // Adjust this value for desired spacing
+        float currentYPosition = 0f; // Start position for the first item
+    
+        foreach (var (id, (item, count)) in playerInventory.items)
+        {
+            var playerMenuItemObject = Instantiate(inventoryMenuItemPrefab);
+            var playerMenuItem = playerMenuItemObject.GetComponent<InventoryMenuItem>();
+            playerMenuItem.Setup(item, count, false);
+    
+            // Set the parent to playerShopInventoryContainer and adjust the local position
+            playerMenuItemObject.transform.SetParent(playerShopInventoryContainer.transform);
+            playerMenuItemObject.transform.localPosition = new Vector3(0, currentYPosition, 0); // Set position with spacing
+    
+            currentYPosition -= verticalSpacing; // Decrease Y position for the next item
+        }
+    }
+  
+
     void DestroyShopMenu()
     {
         foreach (Transform child in shopInventoryContainer.transform)
         {
             Destroy(child.gameObject);
         }
+        foreach (Transform child in playerShopInventoryContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
-    public void BuyItem(int itemId)
+    public void BuyItem(Item item)
     {
-        Debug.Log("Buying item with ID: " + itemId);
-        // shopInventory.BuyItem(itemId);
-        // UpdateShopInventoryDisplay();
-        // UpdateMoneyDisplay();
+        Debug.Log("Buying item with ID: " + item.id);
+        shopInventory.BuyItem(item, playerInventory.money);
+        playerInventory.BuyItem(item);
+        
+        RenderShopMenu();
+        UpdateShopMoneyDisplay();
     }
 
-    public void SellItem(int itemId)
+    public void SellItem(Item item)
     {
-        Debug.Log("Selling item with ID: " + itemId);
-        // shopInventory.SellItem(itemId);
-        // UpdateShopInventoryDisplay();
-        // UpdateMoneyDisplay();
+        Debug.Log("Selling item with ID: " + item.id);
+        playerInventory.SellItem(item);
+        // should a sold item be added to the shop inventory? player could then buy back if 
+        // a mistake was made
+        // shopInventory.SellItem(item);
+        
+        RenderShopMenu();
+        UpdateShopMoneyDisplay();
     }
 }

@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 1
   itemName: Test pickup item
   description: qw
-  buyPrice: 12
-  sellPrice: 10
+  buyPrice: 10
+  sellPrice: 8
