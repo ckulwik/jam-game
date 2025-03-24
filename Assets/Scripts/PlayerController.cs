@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // dont allow player movement when shop menu or regular menu is open
+        if (MenuController.Instance.shopMenuPanel.activeSelf || MenuController.Instance.playerMenuPanel.activeSelf)
+        {
+            return;
+        }
         float horizInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizInput * speed * Time.deltaTime);
 
