@@ -11,6 +11,23 @@ public class Inventory : MonoBehaviour
 
     public int money = 100;
 
+    public static Inventory Instance { get; private set; }
+
+    void Awake()
+    {
+          // Check if an instance already exists
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Destroy the new instance
+            return; // Exit to prevent further execution
+        }
+
+        Instance = this; // Set the singleton instance
+
+        // Ensure this GameObject is not destroyed when loading a new scene
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void AddItem(Item item)
     {
         if (items.ContainsKey(item.id))
