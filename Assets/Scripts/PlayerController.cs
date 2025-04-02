@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; } // Singleton instance
 
     [SerializeField] float speed = 3.0f;
-    private Inventory inventory;
 
     private void Awake()
     {
@@ -20,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
         Instance = this; // Set the singleton instance
         DontDestroyOnLoad(gameObject); // Ensure this GameObject is not destroyed when loading a new scene
-        inventory = GetComponent<Inventory>(); // Get the player's Inventory component
     }
 
     // Update is called once per frame
@@ -46,7 +44,7 @@ public class PlayerController : MonoBehaviour
             PickupItem pickupItem = collision.gameObject.GetComponent<PickupItem>();
             if (pickupItem != null)
             {
-                inventory.AddItem(pickupItem.item); // Add the item to the inventory
+                Inventory.Instance.AddItem(ItemDatabase.Instance.GetItemById(pickupItem.itemId)); // Add the item to the inventory
                 Destroy(collision.gameObject); // destroy the item from the scene
             }
             else

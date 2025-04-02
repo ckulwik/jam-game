@@ -97,8 +97,44 @@ public class Inventory : MonoBehaviour
             display += $"{count}x {item.itemName}: {item.description} (Value: {item.sellPrice * count})\n"; // Use the item's properties
         }
 
-        Debug.Log(display);
         return display;
     }
 
+    [System.Serializable]
+    private class InventoryItemData
+    {
+        public int itemId;
+        public int count;
+    }
+
+    public string SerializeInventory()
+    {
+        var inventoryData = new List<InventoryItemData>();
+        foreach (var kvp in items)
+        {
+            inventoryData.Add(new InventoryItemData
+            {
+                itemId = kvp.Key,
+                count = kvp.Value.count
+            });
+        }
+
+        return JsonUtility.ToJson(inventoryData);
+    }
+
+    public void DeserializeInventory(string json)
+    {
+        var inventoryData = JsonUtility.FromJson<List<InventoryItemData>>(json);
+        items.Clear();
+
+        foreach (var itemData in inventoryData)
+        {
+            // Find the item by ID from your item database
+            Item item = ItemDatabase.Instance.GetItemById(itemData.itemId);
+            if (item != null)
+            {
+                items.Add(item.id, (item, itemData.count));
+            }
+        }
+    }
 }

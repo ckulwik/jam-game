@@ -6,10 +6,9 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance { get; private set; }
 
-    void Awake()
+     void Awake()
     {
-        Load();
-          // Check if an instance already exists
+        // Check if an instance already exists
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject); // Destroy the new instance
@@ -20,22 +19,53 @@ public class MainManager : MonoBehaviour
 
         // Ensure this GameObject is not destroyed when loading a new scene
         DontDestroyOnLoad(gameObject);
+
+        // Initialize Inventory first
+        if (Inventory.Instance == null)
+        {
+            Debug.LogError("Inventory not found! Make sure Inventory is in the scene.");
+            return;
+        }
+
+        Load();
     }
 
     public void Save()
     {
+        // Get the inventory state
+        string inventoryJson = Inventory.Instance.SerializeInventory();
+        
+        // Create save data
         SaveData saveData = new SaveData();
         saveData.money = Inventory.Instance.money;
+        saveData.inventory = inventoryJson;
+        
+        // Save to file
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(Application.persistentDataPath + "/save.json", json);
     }
 
     public void Load()
     {
-        string json = File.ReadAllText(Application.persistentDataPath + "/save.json");
-        SaveData saveData = JsonUtility.FromJson<SaveData>(json);
-        Inventory.Instance.money = saveData.money;
-        Debug.Log($"Loaded money: {Inventory.Instance.money}");
+        string savePath = Application.persistentDataPath + "/save.json";
+        if (File.Exists(savePath))
+        {
+            string json = File.ReadAllText(savePath);
+            SaveData saveData = JsonUtility.FromJson<SaveData>(json);
+            
+            // Load money
+            Inventory.Instance.money = saveData.money;
+            
+            // Load inventory if it exists
+            if (!string.IsNullOrEmpty(saveData.inventory))
+            {
+                Inventory.Instance.DeserializeInventory(saveData.inventory);
+            }
+        }
+        else
+        {
+            Debug.Log("No save file found. Starting with default values.");
+        }
     }
     
 }
@@ -43,6 +73,6 @@ public class MainManager : MonoBehaviour
 class SaveData
 {
     public int money;
-    // public string inventory;
+    public string inventory;
 }
 

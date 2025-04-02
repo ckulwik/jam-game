@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 672011079136983317}
   - component: {fileID: 919861715915944850}
   - component: {fileID: 8165886169497030554}
-  - component: {fileID: -6764832573347498965}
+  - component: {fileID: -474104801728969484}
   m_Layer: 0
   m_Name: Test Pickup Item
   m_TagString: Item
@@ -61,6 +61,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -109,7 +112,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6764832573347498965
+--- !u!114 &-474104801728969484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b86d886409d9ca4193ca5e8161624d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 8af1fc29027ffec4cad424676b840c5c, type: 2}
+  itemId: 0
+  item: {fileID: 0}
 --- !u!1 &6137122453362360698
 GameObject:
   m_ObjectHideFlags: 0
