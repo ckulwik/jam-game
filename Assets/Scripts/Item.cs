@@ -87,9 +87,9 @@ public class ItemDatabase : ScriptableObject
         }
     }
 
-    [SerializeField] private List<Item> itemDb = new List<Item>(); // Serialize this field
+    [SerializeField] private List<Item> itemDb = new List<Item>();
 
-    private Dictionary<int, Item> itemById = new Dictionary<int, Item>(); // This will be our lookup dictionary
+    private Dictionary<int, Item> itemById = new Dictionary<int, Item>();
 
     private void OnEnable()
     {
@@ -106,7 +106,7 @@ public class ItemDatabase : ScriptableObject
         testItem.itemName = "Test pickup Item";
         testItem.description = "A test item that can be picked up.";
         testItem.buyPrice = 10;
-        testItem.sellPrice = 10;
+        testItem.sellPrice = 8;
         itemDb.Add(testItem);
         itemById[testItem.id] = testItem;
 
