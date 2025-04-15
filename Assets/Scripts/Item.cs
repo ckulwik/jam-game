@@ -11,15 +11,15 @@ public class Item : ScriptableObject
     public int sellPrice; 
     
     
-    private void OnEnable()
-    {
-        // Initialize default values
-        id = 0;
-        itemName = "Unnamed Item";
-        description = "No description";
-        buyPrice = 0;
-        sellPrice = 0;
-    }
+    // private void OnEnable()
+    // {
+    //     // Initialize default values
+    //     id = 0;
+    //     itemName = "Unnamed Item";
+    //     description = "No description";
+    //     buyPrice = 0;
+    //     sellPrice = 0;
+    // }
 
     // public Item(int id, string itemName, string description, int sellPrice, int buyPrice)
     // {
@@ -93,50 +93,19 @@ public class ItemDatabase : ScriptableObject
 
     private void OnEnable()
     {
-        InitializeItems();
-    }
-
-    private void InitializeItems()
-    {
-        itemDb.Clear();
         itemById.Clear();
-
-        Item testItem = ScriptableObject.CreateInstance<Item>();
-        testItem.id = 0;
-        testItem.itemName = "Test pickup Item";
-        testItem.description = "A test item that can be picked up.";
-        testItem.buyPrice = 10;
-        testItem.sellPrice = 8;
-        itemDb.Add(testItem);
-        itemById[testItem.id] = testItem;
-
-        Item healthPotion = ScriptableObject.CreateInstance<Item>();
-        healthPotion.id = 1;
-        healthPotion.itemName = "Health Potion";
-        healthPotion.description = "A potion that restores 10 health.";
-        healthPotion.buyPrice = 10;
-        healthPotion.sellPrice = 15;
-        itemDb.Add(healthPotion);
-        itemById[healthPotion.id] = healthPotion;
-
-        Item manaPotion = ScriptableObject.CreateInstance<Item>();
-        manaPotion.id = 2;
-        manaPotion.itemName = "Mana Potion";
-        manaPotion.description = "A potion that restores 10 mana.";
-        manaPotion.buyPrice = 5;
-        manaPotion.sellPrice = 10;
-        itemDb.Add(manaPotion);
-        itemById[manaPotion.id] = manaPotion;
+        foreach (var item in itemDb)
+        {
+            itemById[item.id] = item;
+        }
     }
 
     public Item GetItemById(int id)
     {
-        Debug.Log("items in itemdb: " + itemDb.Count);
         if (itemById.TryGetValue(id, out Item item))
         {
             return item;
         }
-        Debug.LogWarning($"Item with ID {id} not found in database");
         return null;
     }
 }

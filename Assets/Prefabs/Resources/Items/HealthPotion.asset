@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: ItemDatabase
-  m_EditorClassIdentifier: Assembly-CSharp::ItemDatabase
-  itemDb: []
+  m_Script: {fileID: 11500000, guid: 97e3bea02af56e849a64b5b3d31dc59c, type: 3}
+  m_Name: HealthPotion
+  m_EditorClassIdentifier: 
+  id: 2
+  itemName: Unnamed Item
+  description: No description
+  buyPrice: 0
+  sellPrice: 0
