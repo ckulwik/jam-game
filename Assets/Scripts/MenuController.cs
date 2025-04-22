@@ -206,7 +206,7 @@ public GameObject settingsPanel;
         // should a sold item be added to the shop inventory? player could then buy back if 
         // a mistake was made
         // shopInventory.SellItem(item);
-        
+    
         RenderShopMenu();
         UpdateShopMoneyDisplay();
     }
@@ -222,19 +222,15 @@ public GameObject settingsPanel;
     }
 
     public void InventoryButtonClicked() {
-    Debug.Log("Inventory button clicked");
-    ShowOnlyPanel(inventoryPanel);
+        ShowOnlyPanel(inventoryPanel);
     }
     public void CollectionsButtonClicked() {
-        Debug.Log("Collections button clicked");
         ShowOnlyPanel(collectionsPanel);
     }
     public void StoryButtonClicked() {
-        Debug.Log("Story button clicked");
         ShowOnlyPanel(storyPanel);
     }
     public void SettingsButtonClicked() {
-        Debug.Log("Settings button clicked");
         ShowOnlyPanel(settingsPanel);
     }
 }
