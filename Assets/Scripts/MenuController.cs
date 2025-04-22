@@ -40,16 +40,6 @@ public class MenuController : MonoBehaviour
         SetShop();
     }
 
-    private void OnBuyButtonClicked()
-    {
-        Debug.Log("Buy button clicked");
-    }
-
-    private void OnSellButtonClicked()
-    {
-        Debug.Log("Sell button clicked");
-    }
-
     public void SetShop() {
         shopInventory = FindAnyObjectByType<Shop>();
     }
@@ -214,5 +204,18 @@ public class MenuController : MonoBehaviour
         
         RenderShopMenu();
         UpdateShopMoneyDisplay();
+    }
+
+    public void InventoryButtonClicked() {
+        Debug.Log("Inventory button clicked");
+    }
+    public void CollectionsButtonClicked() {
+        Debug.Log("Collections button clicked");
+    }
+    public void StoryButtonClicked() {
+        Debug.Log("Story button clicked");
+    }
+    public void SettingsButtonClicked() {
+        Debug.Log("Settings button clicked");
     }
 }

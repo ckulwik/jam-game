@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: ItemDatabase
   m_EditorClassIdentifier: Assembly-CSharp::ItemDatabase
-  itemDb: []
+  itemDb:
+  - {fileID: 11400000, guid: 844c1c21fe5bba740be4c1eab874fa47, type: 2}
+  - {fileID: 11400000, guid: a7738e35d78c3ec4096c2e3f550b03de, type: 2}
+  - {fileID: 11400000, guid: 3146684151c322a448319025a27e3860, type: 2}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e3bea02af56e849a64b5b3d31dc59c, type: 3}
   m_Name: ManaPotion
   m_EditorClassIdentifier: 
-  id: 1
-  itemName: Unnamed Item
-  description: No description
-  buyPrice: 0
-  sellPrice: 0
+  id: 2
+  itemName: Mana Potion
+  description: A potion that restores 10 mana
+  buyPrice: 10
+  sellPrice: 5
