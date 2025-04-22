@@ -23,6 +23,11 @@ public class MenuController : MonoBehaviour
     public bool canOpenShop = false;
     public GameObject inventoryMenuItemPrefab; // Assign the prefab in the Inspector
 
+    public GameObject inventoryPanel;
+public GameObject collectionsPanel;
+public GameObject storyPanel;
+public GameObject settingsPanel;
+
     private void Awake()
     {
         // Check if an instance already exists
@@ -206,16 +211,30 @@ public class MenuController : MonoBehaviour
         UpdateShopMoneyDisplay();
     }
 
+    private void ShowOnlyPanel(GameObject panelToShow)
+    {
+        inventoryPanel.SetActive(false);
+        collectionsPanel.SetActive(false);
+        storyPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+
+        panelToShow.SetActive(true);
+    }
+
     public void InventoryButtonClicked() {
-        Debug.Log("Inventory button clicked");
+    Debug.Log("Inventory button clicked");
+    ShowOnlyPanel(inventoryPanel);
     }
     public void CollectionsButtonClicked() {
         Debug.Log("Collections button clicked");
+        ShowOnlyPanel(collectionsPanel);
     }
     public void StoryButtonClicked() {
         Debug.Log("Story button clicked");
+        ShowOnlyPanel(storyPanel);
     }
     public void SettingsButtonClicked() {
         Debug.Log("Settings button clicked");
+        ShowOnlyPanel(settingsPanel);
     }
 }
