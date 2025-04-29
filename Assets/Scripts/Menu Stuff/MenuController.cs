@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI; // Include this for UI components
 using System.Collections.Generic; // Include this for List<T>
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class MenuController : MonoBehaviour
 {
@@ -24,9 +25,11 @@ public class MenuController : MonoBehaviour
     public GameObject inventoryMenuItemPrefab; // Assign the prefab in the Inspector
 
     public GameObject inventoryPanel;
-public GameObject collectionsPanel;
-public GameObject storyPanel;
-public GameObject settingsPanel;
+    public GameObject collectionsPanel;
+    public GameObject storyPanel;
+    public GameObject settingsPanel;
+
+    public Button firstMenuButton;
 
     private void Awake()
     {
@@ -54,6 +57,10 @@ public GameObject settingsPanel;
         // Check for key press to toggle the menu
         if (Input.GetKeyDown(KeyCode.E)) // Change KeyCode.M to your desired key
         {
+            // when the menu is opened, click the first button
+            EventSystem.current.SetSelectedGameObject(firstMenuButton.gameObject);
+            firstMenuButton.onClick.Invoke();
+
             TogglePlayerMenu();
         }
 
