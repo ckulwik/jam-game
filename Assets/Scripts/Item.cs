@@ -9,43 +9,6 @@ public class Item : ScriptableObject
     public string description;
     public int buyPrice; 
     public int sellPrice; 
-    
-    
-    // private void OnEnable()
-    // {
-    //     // Initialize default values
-    //     id = 0;
-    //     itemName = "Unnamed Item";
-    //     description = "No description";
-    //     buyPrice = 0;
-    //     sellPrice = 0;
-    // }
-
-    // public Item(int id, string itemName, string description, int sellPrice, int buyPrice)
-    // {
-    //     this.id = id;
-    //     this.itemName = itemName;
-    //     this.description = description;
-    //     this.sellPrice = sellPrice;
-    //     this.buyPrice = buyPrice;
-    // }
-
-    //  public Item(int id)
-    // {
-    //     Item sourceItem = ItemDatabase.Instance.GetItemById(id);
-    //     if (sourceItem != null)
-    //     {
-    //         this.id = sourceItem.id;
-    //         this.itemName = sourceItem.itemName;
-    //         this.description = sourceItem.description;
-    //         this.sellPrice = sourceItem.sellPrice;
-    //         this.buyPrice = sourceItem.buyPrice;
-    //     }
-    //     else
-    //     {
-    //         Debug.LogError($"Failed to create Item with ID {id}: Item not found in database");
-    //     }
-    // }
 
     public static Item CreateItem(int id)
     {

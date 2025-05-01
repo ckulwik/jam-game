@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 25586670}
   - component: {fileID: 25586669}
   - component: {fileID: 25586668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,6 +353,10 @@ PrefabInstance:
     - target: {fileID: 7285917723580675998, guid: e76ea8ae21f1c5a44abbb990ddd789d2, type: 3}
       propertyPath: m_Name
       value: Bar Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285917723580675998, guid: e76ea8ae21f1c5a44abbb990ddd789d2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -720,6 +724,7 @@ GameObject:
   - component: {fileID: 204733815}
   - component: {fileID: 204733814}
   - component: {fileID: 204733817}
+  - component: {fileID: 204733818}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -766,7 +771,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -30
   far clip plane: 1000
   field of view: 54
   orthographic: 1
@@ -816,6 +821,24 @@ MonoBehaviour:
   player: {fileID: 0}
   offset: {x: 10, y: 10, z: -10}
   smoothSpeed: 5
+--- !u!114 &204733818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204733813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a369c23f2923c8245839fbdd140b23da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1584443433}
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 256
+  fadeAlpha: 0.3
+  fadeDuration: 0.5
 --- !u!1 &225175344
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +935,7 @@ GameObject:
   - component: {fileID: 284681768}
   - component: {fileID: 284681767}
   - component: {fileID: 284681766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2520,7 +2543,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bdf78a94116c86048840f41e2a480d1d, type: 2}
   - {fileID: 2100000, guid: bdf78a94116c86048840f41e2a480d1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -2903,7 +2926,7 @@ GameObject:
   - component: {fileID: 1000484924}
   - component: {fileID: 1000484923}
   - component: {fileID: 1000484922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3418,7 +3441,7 @@ GameObject:
   - component: {fileID: 1112508429}
   - component: {fileID: 1112508428}
   - component: {fileID: 1112508427}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3526,7 +3549,7 @@ GameObject:
   - component: {fileID: 1118550605}
   - component: {fileID: 1118550604}
   - component: {fileID: 1118550603}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4154,6 +4177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bar Back Door
       objectReference: {fileID: 0}
+    - target: {fileID: 7285917723580675998, guid: e76ea8ae21f1c5a44abbb990ddd789d2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4340,7 +4367,7 @@ GameObject:
   - component: {fileID: 1324180534}
   - component: {fileID: 1324180533}
   - component: {fileID: 1324180532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4581,7 +4608,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1359627127}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bar Back Door Spawn Point
   m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
@@ -4612,7 +4639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1360345993}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: City
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4662,7 +4689,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1378515394}
   - component: {fileID: 1378515393}
-  - component: {fileID: 1378515395}
   m_Layer: 0
   m_Name: Menu Manager
   m_TagString: Untagged
@@ -4695,6 +4721,7 @@ MonoBehaviour:
   collectionsPanel: {fileID: 990187897}
   storyPanel: {fileID: 622132256}
   settingsPanel: {fileID: 324669942}
+  firstMenuButton: {fileID: 103405645}
 --- !u!4 &1378515394
 Transform:
   m_ObjectHideFlags: 0
@@ -4711,21 +4738,6 @@ Transform:
   - {fileID: 1853504411}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1378515395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378515392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &1431544944
 GameObject:
   m_ObjectHideFlags: 0
@@ -4826,6 +4838,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 100
+--- !u!4 &1584443433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7084940343082591840, guid: 5119ab62ccc0d204f981a2c582db5c07, type: 3}
+  m_PrefabInstance: {fileID: 4719948}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1612251661
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,7 +5102,7 @@ GameObject:
   - component: {fileID: 1676462560}
   - component: {fileID: 1676462559}
   - component: {fileID: 1676462558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5193,7 +5210,7 @@ GameObject:
   - component: {fileID: 1730590858}
   - component: {fileID: 1730590857}
   - component: {fileID: 1730590856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5301,7 +5318,7 @@ GameObject:
   - component: {fileID: 1732897333}
   - component: {fileID: 1732897332}
   - component: {fileID: 1732897331}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5414,7 +5431,7 @@ GameObject:
   - component: {fileID: 1749440205}
   - component: {fileID: 1749440204}
   - component: {fileID: 1749440203}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5767,7 +5784,7 @@ GameObject:
   - component: {fileID: 1813062043}
   - component: {fileID: 1813062042}
   - component: {fileID: 1813062041}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5875,7 +5892,7 @@ GameObject:
   - component: {fileID: 1838471152}
   - component: {fileID: 1838471151}
   - component: {fileID: 1838471150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6319,7 +6336,7 @@ GameObject:
   - component: {fileID: 1924551575}
   - component: {fileID: 1924551574}
   - component: {fileID: 1924551573}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6503,7 +6520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1997657649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bar Door Spawn Point
   m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
@@ -6605,7 +6622,7 @@ GameObject:
   - component: {fileID: 2042334936}
   - component: {fileID: 2042334935}
   - component: {fileID: 2042334934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6901,7 +6918,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3ab4186362f262a4ba86f4ee82f130c9, type: 2}
   - {fileID: 2100000, guid: 3ab4186362f262a4ba86f4ee82f130c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -7018,6 +7035,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3942009954183869706, guid: eba48be5c8e23b243899db5bbd1bf5cb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ab4186362f262a4ba86f4ee82f130c9, type: 2}
     - target: {fileID: 4470373127697036336, guid: eba48be5c8e23b243899db5bbd1bf5cb, type: 3}
       propertyPath: m_Name
       value: Neighbor 1's house

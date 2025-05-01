@@ -20,14 +20,15 @@ public class MainManager : MonoBehaviour
         // Ensure this GameObject is not destroyed when loading a new scene
         DontDestroyOnLoad(gameObject);
 
-        // Initialize Inventory first
-        if (Inventory.Instance == null)
-        {
-            Debug.LogError("Inventory not found! Make sure Inventory is in the scene.");
-            return;
-        }
+        // This seems to always print the error log, but I don't see any related issues
+        // if (Inventory.Instance == null)
+        // {
+        //     Debug.LogError("Inventory not found! Will not attempt to load");
+        //     return;
+        // }
 
-        Load();
+        // Load is here for testing only
+        // Load();
     }
 
     public void Save()
