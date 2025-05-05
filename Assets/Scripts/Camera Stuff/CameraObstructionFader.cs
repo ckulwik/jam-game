@@ -20,7 +20,7 @@ public class CameraObstructionFader : MonoBehaviour
         {
             renderer = rend;
             currentAlpha = startAlpha;
-            this.targetAlpha = targetAlpha;
+            this.targetAlpha = targetAlpha; 
             fadeTime = 0f;
             materials = mats;
         }
