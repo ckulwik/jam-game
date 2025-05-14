@@ -1295,7 +1295,7 @@ GameObject:
   - component: {fileID: 406591286}
   - component: {fileID: 406591285}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Dialog Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4203,6 +4203,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 473181089940992527, guid: f8e8d99f318efa34d8a0eb3321c0fc02, type: 3}
+      propertyPath: dialogBox
+      value: 
+      objectReference: {fileID: 1310385772}
     - target: {fileID: 5617312714377391181, guid: f8e8d99f318efa34d8a0eb3321c0fc02, type: 3}
       propertyPath: m_Name
       value: Townie
@@ -4586,7 +4590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1310385773
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4620,7 +4624,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogText: {fileID: 1445367456}
-  lines: []
+  lines:
+  - This is some text dialog
+  - This is line 2 of the test dialog. Lorem Ipsum etc you know
   letterRenderTime: 0.1
 --- !u!114 &1310385775
 MonoBehaviour:

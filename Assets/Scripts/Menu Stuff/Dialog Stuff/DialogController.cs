@@ -9,11 +9,16 @@ public class DialogController : MonoBehaviour
     public float letterRenderTime;
 
     private int index;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void OnEnable()
     {
         dialogText.text = "";
         StartDialog();
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     // Update is called once per frame
@@ -34,7 +39,8 @@ public class DialogController : MonoBehaviour
 
     void StartDialog()
     {
-     index = 0;   
+     index = 0;  
+     dialogText.text = ""; 
      StartCoroutine(TypeLine());
     }
 
