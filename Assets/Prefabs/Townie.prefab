@@ -150,3 +150,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e84a310f248d34a913a55e8b36291c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thisTownieId: 0
+  dialogBox: {fileID: 0}

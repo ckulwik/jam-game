@@ -13,6 +13,13 @@ public class Inventory : MonoBehaviour
 
     public static Inventory Instance { get; private set; }
 
+    [System.Serializable]
+    private class InventoryItemData
+    {
+        public int itemId;
+        public int count;
+    }
+
     void Awake()
     {
           // Check if an instance already exists
@@ -98,13 +105,6 @@ public class Inventory : MonoBehaviour
         }
 
         return display;
-    }
-
-    [System.Serializable]
-    private class InventoryItemData
-    {
-        public int itemId;
-        public int count;
     }
 
     public string SerializeInventory()
